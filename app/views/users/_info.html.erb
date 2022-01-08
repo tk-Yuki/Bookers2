@@ -1,0 +1,44 @@
+ <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-3">
+        <h2>User info</h2>
+        <%= attachment_image_tag user, :profile_image, :fill,60,60,format:'jpeg', fallback: "no_image.jpg"%>
+        <table class="table">
+        <tbody><tr></tr>
+
+        <tr>
+  	    <th>name</th>
+  	    <th><%= user.name %></th>
+        </tr>
+        <tr>
+  	    <th>introduction</th>
+  	    <th><%= user.introduction %></th>
+
+        </tr>
+        </tbody></table>
+
+
+    <div class="row">
+      <%= link_to "", edit_user_path(user), class:"btn btn-outline-secondary btn-block fas fa-user-cog" %>
+    </div>
+    <h2 class="mt-3">New book</h2>
+    <% if book.errors.any? %>
+      <%= book.errors.count %>件のエラーが発生しました
+      <% book.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    <% end %>
+    <%= form_with model:book, url: books_path, local:true do |f| %>
+     <div class="form-group">
+    <h4>Title</h4>
+    <%= f.text_field :title,class: "col-xs-12" %>
+    </div>
+    <div class="form-group">
+    <h4>Opinion</h4>
+    <%= f.text_field :body,class: "col-xs-12" %>
+    </div>
+    <nav>
+        <%= f.submit 'Create Book',class: "col-xs-12 btn btn-success" %>
+    </nav>
+    <% end %>
+  </div>
